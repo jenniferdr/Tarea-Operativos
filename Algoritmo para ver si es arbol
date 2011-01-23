@@ -1,0 +1,61 @@
+Algoritmo 
+
+Definir el tipo estructura (nodoInicial, nodoFinal, esRaiz, visitado)
+Crear arreglo de tamaño 100 (O cualquier numero grande) tipo "estructura"
+
+Abrir archivo 
+indice=0 (considerando que los arreglos comienzan por 0)
+
+Mientras a el archivo le falte por leer{ 
+
+	Si long(arreglo)= indice (Necesitamos mas espacio) {
+		Crear un arreglo mas grande y copiar todos los datos
+	sino 
+		Leemos el numero del archivo 
+		Lo convertimos en numero 
+		y colocamos el numero en Nodo inicial
+		Hacemos lo mismo para el otro nodo pero lo ponemos en nodoFinal
+		Inicializamos esRaiz= true y visitado= false
+	}
+}
+
+Hacer un Merge sort para ordenar el arreglo segun el NodoInicial
+//Como ya lo tenemos ordenado, las busquedas seran mas rapidas
+// Ahora vamos a recorrer un camino en busqueda de ciclos y verificando las raices
+
+For i=0..tamaño del arreglo {
+	If arreglo[i].visitado=false
+		arreglo[i].visitado=true
+		ve_a= arreglo[i].nodoFinal
+
+		Mientras (seguir= true) hacer
+			pos= busquedaBinaria(ve_a,arreglo)//Si devuelve null es que no sta
+			If pos = null
+				seguir=false
+			sino 
+				If arreglo[i].visitado= true
+					If arreglo[i].esRaiz= true
+						arreglo[i].esRaiz= false
+						seguir= false
+					sino 
+						NO es arbol. Terminar y dar la resp de una vez
+				sino 
+					arreglo[i].esRaiz= false
+					arreglo[i].visitado= true
+			end IF
+			ve_a= arreglo[i].nodoFinal
+		Fin del mientras
+	sino
+		// si ya fue visitado no se hace nada, se pasa al siguiente...	
+} 
+
+// Si sobrevivimos en este punto es que solo nos falta ver si existe una unica raiz 
+   asi que recorremos todo el arreglo viendo arreglo[i].esRaiz hasta conseguir una, 
+   seguimos.. y si encontramos otra automat salimos y decimos q no es arbol. 
+   si llegamos al final y solo hay una raiz SI ES ARBOLL!!! =) o eso creo
+
+Imprimir respuesta
+
+Ojo hay q estar pendiente de manejar los errores q se puedan presentar!! 
+
+
