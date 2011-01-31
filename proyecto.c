@@ -122,7 +122,6 @@ printf("no es arbol no tiene raiz unica");
 	   if (primer->nodo->hijo==0)
 	     { 
 	       contRecorrido++;
-		printf("%d",contRecorrido);
 	       struct Node *nodoV = primer->nodo;
 	       numVisita++;
 	       nodoV->visitado= numVisita; 
@@ -160,12 +159,12 @@ printf("no es arbol no tiene raiz unica");
          }
        }
        if (esArbol==0){
-	   printf("No es arbol");
+	   printf("No es arbol \n");
 	 }else{
-	 printf("Es arbol");
+	 printf("Es arbol \n");
        }
 		
-      
+ 
 	// Se termino la lectura del primer caso ahora hay que buscar si hay solo una raiz 
 	// Recorrer el arbol desde los hijos contando los nodos. al final comparar
 	// Sin embargo en cada recorrido desde cada hoja hay q asignar un numero de visita.
