@@ -16,11 +16,14 @@ main(int argc, char *argv[]){
     printf("no existe el archivo \n ");
     return -1;
   }
+  // Inicializar variables. 1 es "true"
   int esArbol=1;
   int nodoInicial,nodoFinal;
   struct Lista *listNodos= NULL; // Lista que contiene a los nodos 
   int numNodos=0; // numero de nodos en la lista
+  int Caso= 1;
 
+	// Leer todos los pares de nodos 
   while((fscanf(fp,"%d%d",&nodoInicial,&nodoFinal))!=-1 && (nodoFinal!=-1))
     {
       
@@ -28,7 +31,6 @@ main(int argc, char *argv[]){
 	if (nodoInicial== nodoFinal){
 	//No es un arbol
 	  esArbol=0;
-		printf(" no Es arbol nodos iguales");
 	}
 	if(esArbol!=0){
 	if (listNodos==NULL){
@@ -48,21 +50,23 @@ main(int argc, char *argv[]){
 	  struct Lista *al2= NULL;
 	  // Buscar nodoFinal
 	  while(((al->nodo->element)!=nodoFinal) && (al->next != NULL))
-	    {
-	      if (al->nodo->element== nodoInicial) al2= al; // Si encuentra nodoInicial guardar
+	    { 
+		// Si encuentra nodoInicial guardar
+	      if (al->nodo->element== nodoInicial) al2= al;
+		// Seguir recorriendo lista de nodos 
 	      al= al->next;
 	    }
 		if (al->nodo->element== nodoInicial) al2= al;
-	  if ((al->nodo->element) == nodoFinal){ 	// Si ya existe, modificar nodo.
 
-	    if (al->nodo->padre != NULL){ 	// Si ya tiene otro padre no es arbol.
-	      // printf("No es arbol");
+	   // Si ya existe, modificar nodo.
+	  if ((al->nodo->element) == nodoFinal){ 	
+
+	    if (al->nodo->padre != NULL){  // Si ya tiene otro padre no es arbol
 	      esArbol=0; 
-		printf("no es arbol un nodo con dos padres");
-	    }else{ 				// Ya existe pero no tenia padre 
+	    }else{ 			// Ya existe pero no tenia padre 
 	      al->raiz=0;	
 	    }
-	  }else{ 		// Si no existe, agregar en la lista y en el arbol
+	  }else{ 	// Si no existe, agregar en la lista y en el arbol
 	    al->next= crearLista();
 	    al= al->next;
 	    al->nodo= crearNodo(nodoFinal);
@@ -77,6 +81,7 @@ main(int argc, char *argv[]){
 		al2= al2->next;
 	      }
 	  } 
+	// Si no existe crearlo.
 	  if ((al2->nodo->element)!= nodoInicial){
 	    al2->next= crearLista();
 	    al2=al2->next;
@@ -84,14 +89,16 @@ main(int argc, char *argv[]){
 	    numNodos++;
 	    al2->raiz=1;
 	  }
+	  // Crear vinvulo entre nodoInicial y nodoFinal
 	  al->nodo->padre= al2->nodo;
 	  (al2->nodo->hijo)++;
 	  }   
 	}
 	}
       }else{ 
+	//*********FIN DEL CASO*********// Verificar si es arbol
 
- // ver si existe una raiz y solo una
+ 	// ver si existe una raiz y solo una
       struct Lista *primer;
       primer= listNodos;
       int unaRaiz;
@@ -104,7 +111,6 @@ main(int argc, char *argv[]){
 	    unaRaiz= unaRaiz +1;
 	    if (unaRaiz==2){
 	      esArbol=0;
-printf("no es arbol no tiene raiz unica");
 	    }
 	  }
 	    primer=primer->next;
@@ -137,7 +143,6 @@ printf("no es arbol no tiene raiz unica");
 		   else if(nodoV->visitado==nodoV->padre->visitado)
 		     {
 		       esArbol=0;
-			printf("no es arbol hay un ciclo");
 		     }
 	
 		   else
@@ -159,18 +164,14 @@ printf("no es arbol no tiene raiz unica");
          }
        }
        if (esArbol==0){
-	   printf("No es arbol \n");
+	   printf("Caso %d es un arbol.\n",Caso);
 	 }else{
-	 printf("Es arbol \n");
+	 printf("Caso %d no es un arbol.\n",Caso);
        }
 		
- 
-	// Se termino la lectura del primer caso ahora hay que buscar si hay solo una raiz 
-	// Recorrer el arbol desde los hijos contando los nodos. al final comparar
-	// Sin embargo en cada recorrido desde cada hoja hay q asignar un numero de visita.
-	// Si llegas a un nodo que ya esta visitado con el mismo numero que estas asignando entonces eso es un ciclo
-	// pero si tiene un numero diferente no hay problema pero no seguir visitando porq ya estan visitados
-	// Liberar memoria 
+	// Liberar memoria
+	// Inicializar variables para el proximo caso 
+	Caso++;
 	esArbol=1;
   	listNodos= NULL;
   	numNodos=0;
