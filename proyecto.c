@@ -52,7 +52,7 @@ main(int argc, char *argv[]){
 	      if (al->nodo->element== nodoInicial) al2= al; // Si encuentra nodoInicial guardar
 	      al= al->next;
 	    }
-
+		if (al->nodo->element== nodoInicial) al2= al;
 	  if ((al->nodo->element) == nodoFinal){ 	// Si ya existe, modificar nodo.
 
 	    if (al->nodo->padre != NULL){ 	// Si ya tiene otro padre no es arbol.
