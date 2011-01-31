@@ -125,7 +125,7 @@ printf("no es arbol no tiene raiz unica");
 	       struct Node *nodoV = primer->nodo;
 	       numVisita++;
 	       nodoV->visitado= numVisita; 
-	       while(nodoV->padre!=NULL && esArbol=1)
+	       while(nodoV->padre!=NULL && esArbol==1)
 
 		 {
 	   
@@ -157,7 +157,7 @@ printf("no es arbol no tiene raiz unica");
 	 {
 	  esArbol=0;
 printf("no es arbol  hay ciclos");
-printf("%d,%d", contRecorrido,numNodos);
+printf("%d%d", contRecorrido,numNodos);
          }
        }
        if (esArbol==0){
@@ -165,6 +165,7 @@ printf("%d,%d", contRecorrido,numNodos);
 	 }else{
 	 printf("Es arbol");
        }
+		
       
 	// Se termino la lectura del primer caso ahora hay que buscar si hay solo una raiz 
 	// Recorrer el arbol desde los hijos contando los nodos. al final comparar
@@ -172,6 +173,9 @@ printf("%d,%d", contRecorrido,numNodos);
 	// Si llegas a un nodo que ya esta visitado con el mismo numero que estas asignando entonces eso es un ciclo
 	// pero si tiene un numero diferente no hay problema pero no seguir visitando porq ya estan visitados
 	// Liberar memoria 
+	esArbol=1;
+  	listNodos= NULL;
+  	numNodos=0;
       }
     }
       fclose(fp);
