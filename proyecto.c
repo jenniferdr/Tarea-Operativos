@@ -28,6 +28,7 @@ main(int argc, char *argv[]){
 	if (nodoInicial== nodoFinal){
 	//No es un arbol
 	  esArbol=0;
+		printf(" no Es arbol nodos iguales");
 	}
 	if(esArbol!=0){
 	if (listNodos==NULL){
@@ -57,6 +58,7 @@ main(int argc, char *argv[]){
 	    if (al->nodo->padre != NULL){ 	// Si ya tiene otro padre no es arbol.
 	      // printf("No es arbol");
 	      esArbol=0; 
+		printf("no es arbol un nodo con dos padres");
 	    }else{ 				// Ya existe pero no tenia padre 
 	      al->raiz=0;	
 	    }
@@ -101,6 +103,7 @@ main(int argc, char *argv[]){
 	    unaRaiz= unaRaiz +1;
 	    if (unaRaiz==2){
 	      esArbol=0;
+printf("no es arbol no tiene raiz unica");
 	    }
 	  }
 	    primer=primer->next;
@@ -122,7 +125,7 @@ main(int argc, char *argv[]){
 	       struct Node *nodoV = primer->nodo;
 	       numVisita++;
 	       nodoV->visitado= numVisita; 
-	       while(nodoV->padre!=NULL)
+	       while(nodoV->padre!=NULL && esArbol=1)
 
 		 {
 	   
@@ -133,7 +136,8 @@ main(int argc, char *argv[]){
 		     }
 		   else if(nodoV->visitado==nodoV->padre->visitado)
 		     {
-		       //terminar
+		       esArbol=0;
+			printf("no es arbol hay un ciclo");
 		     }
 	
 		   else
@@ -152,6 +156,8 @@ main(int argc, char *argv[]){
        if (contRecorrido!=numNodos)
 	 {
 	  esArbol=0;
+printf("no es arbol  hay ciclos");
+printf("%d,%d", contRecorrido,numNodos);
          }
        }
        if (esArbol==0){
