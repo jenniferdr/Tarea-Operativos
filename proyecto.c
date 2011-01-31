@@ -1,7 +1,5 @@
-# include <stdio.h>
-# include <stdlib.h>
-# include "estructuras.h"
 
+# include "estructuras.h"
 main(int argc, char *argv[]){
 
   FILE *fp;
@@ -35,11 +33,15 @@ main(int argc, char *argv[]){
 	if(esArbol!=0){
 	if (listNodos==NULL){
 	  // Si no hay ningun nodo en la lista crear los 2 primeros
-	  listNodos= crearLista();	
+	  
+	  listNodos= crearLista();
+	  if(listNodos==NULL) return -1;
 	  listNodos->nodo= crearNodo(nodoFinal);
 	  listNodos->next= crearLista();
+	  if(listNodos->nodo==NULL || listNodos->next==NULL )return -1;
 	  struct Lista *al= listNodos->next;
 	  al->nodo= crearNodo(nodoInicial);
+	  if(al->nodo==NULL) return -1;
 	  (al->nodo->hijo)++;
 	  al->raiz= 1;
 	  listNodos->nodo->padre= al->nodo;
@@ -68,8 +70,10 @@ main(int argc, char *argv[]){
 	    }
 	  }else{ 	// Si no existe, agregar en la lista y en el arbol
 	    al->next= crearLista();
+	    if(al->next==NULL) return -1;
 	    al= al->next;
 	    al->nodo= crearNodo(nodoFinal);
+	    if(al->nodo==NULL) return -1;
 	    numNodos++;
 	  }
 	  if(esArbol!=0){
@@ -84,8 +88,10 @@ main(int argc, char *argv[]){
 	// Si no existe crearlo.
 	  if ((al2->nodo->element)!= nodoInicial){
 	    al2->next= crearLista();
+	    if(al2->next==NULL) return -1;
 	    al2=al2->next;
 	    al2->nodo=crearNodo(nodoInicial);
+	    if(al2->nodo==NULL) return -1;
 	    numNodos++;
 	    al2->raiz=1;
 	  }
@@ -103,7 +109,7 @@ main(int argc, char *argv[]){
       primer= listNodos;
       int unaRaiz;
       unaRaiz=0;
-	   
+
        while(primer!=NULL && esArbol!=0)
 	{
 	if (primer->raiz==1)
@@ -114,7 +120,8 @@ main(int argc, char *argv[]){
 	    }
 	  }
 	    primer=primer->next;
-	}
+
+ 	}
 
 
       
@@ -165,18 +172,31 @@ main(int argc, char *argv[]){
          }
        }
        if (esArbol==0){
-	   printf("Caso %d es un arbol.\n",Caso);
+	   printf("Caso %d no es un arbol.\n",Caso);
 	 }else{
-	 printf("Caso %d no es un arbol.\n",Caso);
+	 printf("Caso %d es un arbol.\n",Caso);
        }
 		
 	// Liberar memoria
-	// Inicializar variables para el proximo caso 
+	struct Lista *aux;
+	aux=listNodos;      
+
+	while(listNodos!=NULL)
+	  {
+	     
+	    aux=listNodos->next;
+	    free(listNodos->nodo);
+	    free(listNodos);
+	    listNodos=aux;
+	   
+	}
+// Inicializar variables para el proximo caso 
 	Caso++;
 	esArbol=1;
   	listNodos= NULL;
   	numNodos=0;
       }
+
     }
       fclose(fp);
      
