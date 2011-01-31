@@ -118,36 +118,37 @@ main(int argc, char *argv[]){
 
 
       
-  //struct Lista *recorrido;
+  	// Recorrer el arbol en busca de ciclos 
        primer= listNodos;
        int numVisita=0;
        int contRecorrido=0;
        if (esArbol!=0){
        while(primer!=NULL)
-	 {  
+	 { // Se comienza a recorrer el arbol por los nodos sin hijos 
 	   if (primer->nodo->hijo==0)
 	     { 
 	       contRecorrido++;
 	       struct Node *nodoV = primer->nodo;
 	       numVisita++;
 	       nodoV->visitado= numVisita; 
+		// Iniciar recorrido
 	       while(nodoV->padre!=NULL && esArbol==1)
-
 		 {
-	   
+	   	
 		   if (nodoV->padre->visitado==0)
-		     {
+		     { // marcar el nodo como visitado y contar los que visito
 		       contRecorrido++;
 		       nodoV->padre->visitado=numVisita;
 		     }
 		   else if(nodoV->visitado==nodoV->padre->visitado)
-		     {
+		     { /* Si el numero de la visita del nodo es igual a la 
+			 del recorrido Hay un ciclo */
 		       esArbol=0;
 		     }
 	
 		   else
 		     {
-		  
+		  // Si ya esta visitado seguir con el prox hijo
 		       break;
 		     }
 		 
