@@ -90,6 +90,7 @@ main(int argc, char *argv[]){
 	}
 	}
       }else{ 
+
  // ver si existe una raiz y solo una
       struct Lista *primer;
       primer= listNodos;
@@ -116,12 +117,12 @@ printf("no es arbol no tiene raiz unica");
        int numVisita=0;
        int contRecorrido=0;
        if (esArbol!=0){
-       while(primer!=NULL )
-	 {
-	   if (primer->nodo->hijo=0)
-	     {
+       while(primer!=NULL)
+	 {  
+	   if (primer->nodo->hijo==0)
+	     { 
 	       contRecorrido++;
-
+		printf("%d",contRecorrido);
 	       struct Node *nodoV = primer->nodo;
 	       numVisita++;
 	       nodoV->visitado= numVisita; 
@@ -156,8 +157,6 @@ printf("no es arbol no tiene raiz unica");
        if (contRecorrido!=numNodos)
 	 {
 	  esArbol=0;
-printf("no es arbol  hay ciclos");
-printf("%d%d", contRecorrido,numNodos);
          }
        }
        if (esArbol==0){
